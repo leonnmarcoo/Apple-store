@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Apple Store</title>
+    <style>
+      :root { --card-width: 440px; --radius: 14px; --shadow: 0 24px 70px rgba(0,0,0,.18); --border: #e5e7eb; --bg: #f1f2f4; --text: #111; --muted: #6b7280; }
+      * { box-sizing: border-box; }
+      body.login-body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; color: var(--text); background: var(--bg); }
+      .login-wrapper { min-height: 100svh; display: grid; place-items: center; padding: 24px; }
+      .login-card { width: min(100%, var(--card-width)); background: #fff; border-radius: var(--radius); padding: 40px 36px; box-shadow: var(--shadow); }
+      .login-logo { display: block; width: 38px; height: 38px; object-fit: contain; margin: 6px auto 12px; }
+      .login-title { text-align: center; margin: 0 0 22px; font-size: 28px; font-weight: 700; }
+      .login-form { display: grid; gap: 14px; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 1px, 1px); white-space: nowrap; border: 0; }
+      .login-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 15px; outline: none; transition: border-color .15s, box-shadow .15s; }
+      .login-input:focus { border-color: #9ca3af; box-shadow: 0 0 0 3px rgba(0,0,0,.05); }
+      .login-links { display: flex; justify-content: flex-end; margin-top: 2px; }
+      .login-links a { color: #2563eb; font-size: 13.5px; text-decoration: none; }
+      .login-links a:hover { text-decoration: underline; }
+      .login-button { width: 100%; height: 48px; border: none; border-radius: 10px; background: #111; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 6px; transition: filter .15s, transform .02s; }
+      .login-button:hover { filter: brightness(1.05); }
+      .login-button:active { transform: translateY(1px); }
+      .login-footer-text { text-align: center; color: var(--muted); font-size: 14px; margin: 16px 0 0; }
+      .login-footer-text a { color: #2563eb; text-decoration: none; font-weight: 600; }
+      .login-footer-text a:hover { text-decoration: underline; }
+      .error-message { background: #fef2f2; color: #dc2626; padding: 12px 14px; border: 1px solid #fecaca; border-radius: 8px; font-size: 14px; margin-bottom: 14px; display: none; }
+      .success-message { background: #f0fdf4; color: #166534; padding: 12px 14px; border: 1px solid #bbf7d0; border-radius: 8px; font-size: 14px; margin-bottom: 14px; display: none; }
+      .loading { opacity: 0.6; pointer-events: none; }
+      .login-button:disabled { opacity: 0.6; cursor: not-allowed; }
+      @media (max-width: 420px) { .login-card { padding: 28px 22px; } }
+    </style>
+  </head>
+  <body class="login-body">
+    <div class="page-container-white-background">
+      
+    </div>
+    <main class="login-wrapper">
+      <section class="login-card" aria-labelledby="login-title">
+        <img src="assets/Logo.png" alt="Apple logo" class="login-logo" />
+        <h1 id="login-title" class="login-title">Login</h1>
+
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+
+        <form id="login-form" class="login-form" autocomplete="on" novalidate>
+          <label for="username" class="sr-only">Username</label>
+          <input id="username" name="username" type="text" placeholder="Username" class="login-input" required />
+
+          <label for="password" class="sr-only">Password</label>
+          <input id="password" name="password" type="password" placeholder="Password" class="login-input" required />
+
+          <div class="login-links">
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-button">Log in</button>
+        </form>
+
+        <p class="login-footer-text">Don't have an account? <a href="sign-up.html" class="login-link">Sign up</a></p>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const submitButton = loginForm.querySelector('.login-button');
+
+        // Hide messages function
+        function hideMessages() {
+          errorMessage.style.display = 'none';
+          successMessage.style.display = 'none';
+        }
+
+        // Show error message
+        function showError(message) {
+          hideMessages();
+          errorMessage.textContent = message;
+          errorMessage.style.display = 'block';
+          errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Show success message
+        function showSuccess(message) {
+          hideMessages();
+          successMessage.textContent = message;
+          successMessage.style.display = 'block';
+        }
+
+        // Set loading state
+        function setLoading(loading) {
+          submitButton.disabled = loading;
+          submitButton.textContent = loading ? 'Logging in...' : 'Log in';
+          loginForm.classList.toggle('loading', loading);
+        }
+
+        // Form validation
+        function validateForm(username, password) {
+          if (!username.trim()) {
+            showError('Please enter your username');
+            return false;
+          }
+          if (!password) {
+            showError('Please enter your password');
+            return false;
+          }
+          return true;
+        }
+
+        // Form submission
+        loginForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          hideMessages();
+
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+
+          if (!validateForm(username, password)) {
+            return;
+          }
+
+          setLoading(true);
+
+          try {
+            const response = await fetch('/api/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              showSuccess('Login successful! Redirecting...');
+              setTimeout(() => {
+                window.location.href = data.redirect || '/index.html';
+              }, 1000);
+            } else {
+              showError(data.error || 'Login failed. Please try again.');
+            }
+          } catch (error) {
+            console.error('Login error:', error);
+            showError('Network error. Please check your connection and try again.');
+          } finally {
+            setLoading(false);
+          }
+        });
+
+        // Hide messages when user starts typing
+        document.getElementById('username').addEventListener('input', hideMessages);
+        document.getElementById('password').addEventListener('input', hideMessages);
+      });
+    </script>
+  </body>
+  </html>
