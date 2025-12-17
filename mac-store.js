@@ -51,7 +51,7 @@ function createProductCard(product) {
         </div>
         <div class="product-info-main-container">
             <h2>${product.name}</h2>
-            ${product.chipInfo ? `<p>${product.chipInfo}</p>` : ''}
+            ${product.chipInfo ? `<p><strong>${product.chipInfo}</strong></p>` : ''}
             <p>${product.description}</p>
             <p class="price-range">From ₱${product.price.toLocaleString()}</p>
             <button class="buy-button-products">Buy</button>
