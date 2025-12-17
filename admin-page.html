@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head> 
+		<meta charset="UTF-8">
+		<title>Apple</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+        <script src="admin.js" defer></script>
+	</head>
+
+    <body>
+        <div class="page-container-white-background">
+            <header>
+                <div class="header-main-container">
+                    <div class="apple-logo">
+                        <img src="assets/Logo.png" alt="Logo" width="100" height="100" id="apple-logo">
+                    </div>
+
+                    <div class="menu-items-main-container">
+                        <a href="admin-page.html" style="font-weight: 500;">Product</a>
+                        <a href="users.html">Users</a>
+                        <a href="order.html">Order</a>
+                        <a href="bag.html">Bag</a>
+                    </div>
+
+                    <div class="menu-icons-main-container">
+                        <!-- <a href="#"><img src="assets/Icons/Search.png" alt="Search" width="20" height="20"></a>
+                        <a href="#"><img src="assets/Icons/Profile.png" alt="Profile" width="20" height="20"></a>
+                        <a href="#"><img src="assets/Icons/Cart.png" alt="Cart" width="20" height="20"></a> -->
+                    </div>
+                </div>
+            </header>
+
+            <section class="admin-page-main-container">
+                <div class="admin-page-title-container">
+                    <h1>Products</h1>
+                </div>
+
+                <div class="admin-page-input-product-information-main-container">
+                    <div class="admin-page-input-product-details-container">
+                        <div class="product-form">
+                            <div class="product-title">
+                                <p>Product Name</p>
+                            </div>
+                            <div class="product-text-box">
+                                <input class="product-text-field" name="product_name">
+                            </div>
+                        </div>
+
+                        <div class="product-form">
+                            <div class="product-title">
+                                <p>Product Type</p>
+                            </div>
+                            <div class="product-text-box">
+                                <select class="product-text-field" name="product_type">
+                                    <option value="">Select Product Type</option>
+                                    <option value="iPhone">iPhone</option>
+                                    <option value="iPad">iPad</option>
+                                    <option value="Mac">Mac</option>
+                                    <option value="Airpods">AirPods</option>
+                                    <option value="Watch">Watch</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="product-form">
+                            <div class="product-title">
+                                <p>Price</p>
+                            </div>
+                            <div class="product-text-box">
+                                 <input type="number" class="product-text-field" name="product_price" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="product-form">
+                            <div class="product-title">
+                                <p>Description</p>
+                            </div>
+                            <div class="product-text-box">
+                                <input type="text" class="product-text-field" name="product_description">
+                            </div>
+                        </div>
+
+                        <div class="product-form">
+                            <div class="product-title">
+                                <p>Description</p>
+                            </div>
+                            <div class="product-text-box">
+                                <input type="text" class="product-text-field" name="product_description">
+                            </div>
+                        </div>
+
+                        <div class="product-form">
+                            <div class="product-title">
+                                <p>Chip Info</p>
+                            </div>
+                            <div class="product-text-box">
+                                <input type="text" class="product-text-field" name="product_chip" placeholder="e.g., M4 chip">
+                            </div>
+                        </div>
+
+                        <div class="product-form">
+                            <div class="product-title">
+                                <p>Product Image</p>
+                            </div>
+                            <div class="product-text-box">
+                                <input type="file" class="product-text-field" name="product_image" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="database-table-view-main-container">
+                        <div class="table-view-container" id="products-table">
+                            <table class="products-data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Price</th>
+                                        <th>Chip</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-table-body">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="crud-buttons-container">
+                            <div class="crud-buttons">
+                                <button id="create" value="create">Create</button>
+                                <button id="update" value="update">Update</button>
+                                <button id="delete" value="delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-main-container">
+                    <div class="footer-logo-section">
+                        <div class="footer-col">
+                            <img src="assets/Logo.png" alt="Logo" width="50" height="50" id="apple-logo">
+                        </div>
+                    </div>
+
+                    <div class="footer-categories-main-container">
+
+                        <div class="footer-col">
+                            <div class="footer-col-title">
+                                <h3>Mac</h3>
+                            </div>
+                            <div class="footer-categories">
+                                <a href="#">MacBook Pro</a>
+                                <a href="#">MacBook Air</a>
+                                <a href="#">iMac</a>
+                                <a href="#">Mac Mini</a>
+                                <a href="#">Mac Studio</a>
+                                <a href="#">Mac Pro</a>
+                                <a href="#">Displays</a>
+                            </div>
+                        </div>
+
+                        <div class="footer-col">
+                            <div class="footer-col-title">
+                                <h3>iPad</h3>
+                            </div>
+                            <div class="footer-categories">
+                                <a href="#">iPad Pro</a>
+                                <a href="#">iPad Air</a>
+                                <a href="#">iPad Mini</a>
+                                <a href="#">iPad</a>
+                            </div>
+                        </div>
+
+                        <div class="footer-col">
+                            <div class="footer-col-title">
+                                <h3>iPhone</h3>
+                            </div>
+                            <div class="footer-categories">
+                                <a href="#">iPhone 17 Pro</a>
+                                <a href="#">iPhone 17</a>
+                                <a href="#">iPhone 17 Air</a>
+                                <a href="#">iPhone 16e</a>
+                                <a href="#">iPhone 16</a>
+                            </div>
+                        </div>
+
+                        <div class="footer-col">
+                            <div class="footer-col-title">
+                                <h3>Watch</h3>
+                            </div>
+                            <div class="footer-categories">
+                                <a href="#">Watch Series 11</a>
+                                <a href="#">Watch SE</a>
+                                <a href="#">Watch Ultra 3</a>
+                                <a href="#">Watch Nike</a>
+                                <a href="#">Watch Hermes</a>
+                            </div>
+                        </div>
+
+                        <div class="footer-col">
+                            <div class="footer-col-title">
+                                <h3>Accessories</h3>
+                            </div>
+                            <div class="footer-categories">
+                                <a href="#">AirPods</a>
+                                <a href="#">AirPods Pro</a>
+                                <a href="#">AirPods Max</a>
+                                <a href="#">MagSafe Charger</a>
+                                <a href="#">Apple Watch Bands</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

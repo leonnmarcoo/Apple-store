@@ -3,10 +3,40 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const path = require('path');
+const multer = require('multer');
+const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Ensure uploads directory exists
+const uploadDir = path.join(__dirname, 'assets', 'Products', 'Uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: function (req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+      return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+  }
+});
 
 // Middleware
 app.use(express.static(__dirname));
@@ -48,6 +78,19 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
+
+// Product Schema
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true, trim: true },
+  type: { type: String, required: true, enum: ['iPhone', 'iPad', 'Mac', 'Airpods', 'Watch'] },
+  price: { type: Number, required: true, min: 0 },
+  description: { type: String, required: true },
+  chipInfo: { type: String, default: '' },
+  image: { type: String, default: '' },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const Product = mongoose.model('Product', productSchema);
 
 // Middleware to check if user is authenticated
 const requireAuth = (req, res, next) => {
@@ -190,6 +233,120 @@ app.get('/api/auth-check', (req, res) => {
 // Protected route example
 app.get('/protected', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Product CRUD Routes
+
+// Get all products
+app.get('/api/products', async (req, res) => {
+  try {
+    const { type } = req.query;
+    const filter = type ? { type } : {};
+    const products = await Product.find(filter).sort({ createdAt: -1 });
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
+});
+
+// Get single product
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(product);
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    res.status(500).json({ error: 'Failed to fetch product' });
+  }
+});
+
+// Create product
+app.post('/api/products', upload.single('image'), async (req, res) => {
+  try {
+    const { name, type, price, description, chipInfo } = req.body;
+
+    if (!name || !type || !price || !description) {
+      return res.status(400).json({ error: 'Name, type, price, and description are required' });
+    }
+
+    const imagePath = req.file ? `assets/Products/Uploads/${req.file.filename}` : '';
+
+    const newProduct = new Product({
+      name,
+      type,
+      price,
+      description,
+      chipInfo: chipInfo || '',
+      image: imagePath
+    });
+
+    await newProduct.save();
+    res.status(201).json(newProduct);
+  } catch (error) {
+    console.error('Error creating product:', error);
+    res.status(500).json({ error: 'Failed to create product' });
+  }
+});
+
+// Update product
+app.put('/api/products/:id', upload.single('image'), async (req, res) => {
+  try {
+    const { name, type, price, description, chipInfo } = req.body;
+    const updateData = { name, type, price, description, chipInfo };
+
+    if (req.file) {
+      updateData.image = `assets/Products/Uploads/${req.file.filename}`;
+      const oldProduct = await Product.findById(req.params.id);
+      if (oldProduct && oldProduct.image && oldProduct.image.includes('Uploads/')) {
+        const oldImagePath = path.join(__dirname, oldProduct.image);
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+      }
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    res.json(updatedProduct);
+  } catch (error) {
+    console.error('Error updating product:', error);
+    res.status(500).json({ error: 'Failed to update product' });
+  }
+});
+
+// Delete product
+app.delete('/api/products/:id', async (req, res) => {
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    
+    if (!deletedProduct) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    if (deletedProduct.image && deletedProduct.image.includes('Uploads/')) {
+      const imagePath = path.join(__dirname, deletedProduct.image);
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+    }
+
+    res.json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    res.status(500).json({ error: 'Failed to delete product' });
+  }
 });
 
 // Error handling middleware
