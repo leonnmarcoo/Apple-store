@@ -39,6 +39,8 @@ function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
 
+    const formattedPrice = `₱${parseFloat(product.price).toLocaleString()}`;
+    
     card.innerHTML = `
         <div class="product-image-container">
             <img src="${product.image}" alt="${product.name}">
@@ -46,7 +48,7 @@ function createProductCard(product) {
         <div class="product-info-main-container">
             <h2>${product.name}</h2>
             <p>${product.description}</p>
-            <p class="price-range">From ${product.price}</p>
+            <p class="price-range">From ${formattedPrice}</p>
             <button class="buy-button-products">Buy</button>
         </div>
     `;

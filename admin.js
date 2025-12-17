@@ -10,6 +10,7 @@ function setupEventListeners() {
     const createBtn = document.getElementById('create');
     const updateBtn = document.getElementById('update');
     const deleteBtn = document.getElementById('delete');
+    const productTypeSelect = document.querySelector('select[name="product_type"]');
 
     if (createBtn) {
         createBtn.addEventListener('click', handleCreate);
@@ -19,6 +20,18 @@ function setupEventListeners() {
     }
     if (deleteBtn) {
         deleteBtn.addEventListener('click', handleDelete);
+    }
+    if (productTypeSelect) {
+        productTypeSelect.addEventListener('change', toggleChipInfoField);
+    }
+}
+
+function toggleChipInfoField() {
+    const productType = document.querySelector('select[name="product_type"]').value;
+    const chipInfoField = document.getElementById('chip-info-field');
+    
+    if (chipInfoField) {
+        chipInfoField.style.display = productType === 'Mac' ? 'block' : 'none';
     }
 }
 
@@ -78,6 +91,9 @@ async function loadProductIntoForm(productId) {
         document.querySelector('input[name="product_price"]').value = product.price;
         document.querySelector('input[name="product_description"]').value = product.description;
         document.querySelector('input[name="product_chip"]').value = product.chipInfo || '';
+        
+        // Trigger chip info field visibility based on product type
+        toggleChipInfoField();
         
         const fileInput = document.querySelector('input[name="product_image"]');
         if (product.image) {
