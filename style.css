@@ -607,29 +607,35 @@ footer #apple-logo {
     gap: 30px;
     align-items: center;
     flex-shrink: 0;
+    width: 300px;
 }
 
 .product-image-container {
-    width: 500px;
-    height: 340px;
+    width: auto;
+    max-width: 500px;
+    height: auto;
     border-radius: 20px;
     overflow: hidden;
     background-color: #f5f5f7;
 }
 
 .product-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 340px;
+    display: block;
+    object-fit: contain;
 }
 
 /* Product Info */
 .product-info-main-container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
     align-items: center;
     text-align: center;
+    width: 100%;
 }
 
 .product-info-main-container h2 {
@@ -652,6 +658,9 @@ footer #apple-logo {
     color: #1d1d1f;
     margin: 0;
     line-height: 1.5;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .product-info-main-container .price-range {
@@ -880,6 +889,235 @@ footer #apple-logo {
 }
 
 /* ==========================================
+   Bag Page Styles
+   ========================================== */
+
+/* Bag Hero Section */
+.bag-hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 50px 96px;
+    padding-top: 150px;
+}
+
+.bag-title-container h1 {
+    font-size: 52px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+/* Bag Products Section */
+.bag-products-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 96px;
+    padding-bottom: 50px;
+}
+
+.bag-products-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.empty-bag-message {
+    font-size: 24px;
+    font-weight: 500;
+    color: #495b6e;
+    text-align: center;
+    padding: 100px 0;
+}
+
+/* Bag Product Container */
+.bag-product-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.bag-product-info {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.bag-product-photo {
+    width: 300px;
+    height: auto;
+    min-height: 200px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bag-product-photo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.bag-product-name {
+    font-size: 32px;
+    font-weight: 590;
+    color: #000000;
+    margin: 0;
+}
+
+/* Bag Product Price and Quantity */
+.bag-product-price-quantity {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.bag-product-price {
+    font-size: 32px;
+    font-weight: 590;
+    color: #000000;
+    margin: 0;
+}
+
+/* Quantity Control */
+.bag-quantity-control {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 50px;
+    width: 180px;
+}
+
+.qty-btn {
+    width: 60px;
+    height: 50px;
+    border: none;
+    background-color: #ffffff;
+    border: 2px solid #f5f5f7;
+    font-size: 24px;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-btn:hover {
+    background-color: #f5f5f7;
+}
+
+.qty-value {
+    flex: 1;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 590;
+    color: #000000;
+}
+
+/* Bag Total Section */
+.bag-total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.bag-total-info {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.bag-total-placeholder {
+    width: 300px;
+    height: 200px;
+    background-color: #f5f5f7;
+    border-radius: 20px;
+}
+
+.bag-total-label {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+.bag-total-price-checkout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+    height: 200px;
+}
+
+.bag-total-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+.checkout-button {
+    padding: 10px 40px;
+    height: 50px;
+    background-color: #0073ec;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 590;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.checkout-button:hover {
+    background-color: #005bb5;
+}
+
+/* ==========================================
+   Add Button Styles (for product pages)
+   ========================================== */
+
+.add-button-products {
+    padding: 10px 20px;
+    background-color: #0073ec;
+    color: #ffffff;
+    border: 2px solid #0073ec;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 510;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-button-products:hover {
+    background-color: #005bb5;
+    border-color: #005bb5;
+}
+
+.add-button-products.added {
+    background-color: #ffffff;
+    color: #0073ec;
+    border: 2px solid #0073ec;
+}
+
+.add-button-products.added:hover {
+    background-color: #f5f5f7;
+}
+
+/* ==========================================
    Responsive Adjustments
    ========================================== */
 
@@ -917,8 +1155,11 @@ footer #apple-logo {
     }
     
     .product-image-container {
-        width: 400px;
-        height: 280px;
+        max-width: 400px;
+    }
+    
+    .product-image-container img {
+        max-height: 280px;
     }
     
     /* Admin page responsive */
@@ -934,6 +1175,13 @@ footer #apple-logo {
     
     .admin-table-section {
         width: 700px;
+    }
+    
+    /* Bag page responsive */
+    .bag-hero-section,
+    .bag-products-section {
+        padding-left: 48px;
+        padding-right: 48px;
     }
     
     .footer-categories-main-container {
@@ -979,8 +1227,11 @@ footer #apple-logo {
     
     /* Product card responsive */
     .product-image-container {
-        width: 350px;
-        height: 240px;
+        max-width: 350px;
+    }
+    
+    .product-image-container img {
+        max-height: 240px;
     }
     
     .product-info-main-container h2 {
@@ -1016,6 +1267,33 @@ footer #apple-logo {
         min-width: 150px;
         font-size: 18px;
         padding: 10px 25px;
+    }
+    
+    /* Bag page responsive */
+    .bag-title-container h1 {
+        font-size: 40px;
+    }
+    
+    .bag-product-photo {
+        width: 200px;
+        height: auto;
+        min-height: 150px;
+    }
+    
+    .bag-product-name,
+    .bag-product-price,
+    .bag-total-label,
+    .bag-total-price {
+        font-size: 24px;
+    }
+    
+    .bag-product-info {
+        gap: 30px;
+    }
+    
+    .checkout-button {
+        font-size: 18px;
+        padding: 8px 30px;
     }
     
     .footer-categories-main-container {
@@ -1100,8 +1378,11 @@ footer #apple-logo {
     }
     
     .product-image-container {
-        width: 280px;
-        height: 200px;
+        max-width: 280px;
+    }
+    
+    .product-image-container img {
+        max-height: 200px;
     }
     
     .product-info-main-container h2 {
@@ -1110,5 +1391,94 @@ footer #apple-logo {
     
     .product-info-main-container {
         gap: 15px;
+    }
+    
+    /* Bag page responsive - mobile */
+    .bag-hero-section,
+    .bag-products-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .bag-title-container h1 {
+        font-size: 32px;
+    }
+    
+    .bag-product-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .bag-product-info {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .bag-product-photo {
+        width: 150px;
+        height: auto;
+        min-height: 100px;
+    }
+    
+    .bag-product-name,
+    .bag-product-price {
+        font-size: 20px;
+    }
+    
+    .bag-product-price-quantity {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        width: 100%;
+    }
+    
+    .bag-total-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .bag-total-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .bag-total-placeholder {
+        display: none;
+    }
+    
+    .bag-total-label,
+    .bag-total-price {
+        font-size: 24px;
+    }
+    
+    .bag-total-price-checkout {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        width: 100%;
+    }
+    
+    .checkout-button {
+        font-size: 16px;
+        padding: 8px 20px;
+        height: 40px;
+    }
+    
+    .bag-quantity-control {
+        width: 140px;
+        height: 40px;
+    }
+    
+    .qty-btn {
+        width: 45px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .qty-value {
+        font-size: 20px;
     }
 }

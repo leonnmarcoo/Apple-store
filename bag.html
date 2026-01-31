@@ -7,118 +7,142 @@
     <title>Bag - Apple Store</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="bag.js" defer></script>
 </head>
 
 <body>
-    <div class="page-container-white-background">
+    <div class="page-container-grey-background">
         <header>
             <div class="header-main-container">
                 <div class="apple-logo">
                     <img src="assets/Logo.png" alt="Apple Logo">
                 </div>
 
-                <div class="menu-items-main-container admin-nav">
-                    <a href="admin-page.html">Products</a>
-                    <a href="users.html">User</a>
-                    <a href="order.html">Orders</a>
-                    <a href="bag.html" class="active">Bag</a>
+                <div class="menu-items-main-container">
+                    <a href="index.html">Home</a>
+                    <a href="mac-store.html">Mac</a>
+                    <a href="iPad-store.html">iPad</a>
+                    <a href="iPhone-Store.html">iPhone</a>
+                    <a href="Watch-store.html">Watch</a>
+                    <a href="AirPods-store.html">AirPods</a>
                 </div>
 
                 <div class="menu-icons-main-container">
+                    <a href="#" class="icon-button">
+                        <img src="assets/Icons/Search.png" alt="Search">
+                    </a>
+                    <a href="login.html" id="profile-button" class="icon-button">
+                        <img src="assets/Icons/Profile.png" alt="User">
+                    </a>
+                    <a href="bag.html" class="icon-button active">
+                        <img src="assets/Icons/Cart.png" alt="Bag">
+                    </a>
                 </div>
             </div>
         </header>
 
-        <section class="admin-page-main-container">
-            <div class="admin-page-title-container">
+        <!-- Hero Section with Title -->
+        <section class="bag-hero-section">
+            <div class="bag-title-container">
                 <h1>Bag</h1>
             </div>
         </section>
 
-        <section class="table-view-placeholder">
-            <div class="table">
+        <!-- Products Section -->
+        <section class="bag-products-section">
+            <div id="bag-products-container" class="bag-products-container">
+                <!-- Bag items will be dynamically loaded here -->
+                <p class="empty-bag-message">Your bag is empty.</p>
+            </div>
 
+            <!-- Total Section -->
+            <div class="bag-total-container" id="bag-total-section" style="display: none;">
+                <div class="bag-total-info">
+                    <div class="bag-total-placeholder"></div>
+                    <p class="bag-total-label">Your Total</p>
+                </div>
+                <div class="bag-total-price-checkout">
+                    <p class="bag-total-price" id="bag-total-price">₱0.00</p>
+                    <button class="checkout-button" id="checkout-btn">Check Out</button>
+                </div>
             </div>
         </section>
 
-        <div class="page-container-grey-background">
-            <footer>
-                <div class="footer-main-container">
-                    <div class="footer-logo-section">
-                        <div class="footer-col">
-                            <img src="assets/Logo.png" alt="Apple Logo">
+        <!-- Footer -->
+        <footer>
+            <div class="footer-main-container">
+                <div class="footer-logo-section">
+                    <div class="footer-col">
+                        <img src="assets/Logo.png" alt="Apple Logo">
+                    </div>
+                </div>
+
+                <div class="footer-categories-main-container">
+                    <div class="footer-col">
+                        <div class="footer-col-title">
+                            <h3>Mac</h3>
+                        </div>
+                        <div class="footer-categories">
+                            <a href="#">MacBook Pro</a>
+                            <a href="#">MacBook Air</a>
+                            <a href="#">iMac</a>
+                            <a href="#">Mac Mini</a>
+                            <a href="#">Mac Studio</a>
+                            <a href="#">Mac Pro</a>
+                            <a href="#">Displays</a>
                         </div>
                     </div>
 
-                    <div class="footer-categories-main-container">
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>Mac</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">MacBook Pro</a>
-                                <a href="#">MacBook Air</a>
-                                <a href="#">iMac</a>
-                                <a href="#">Mac Mini</a>
-                                <a href="#">Mac Studio</a>
-                                <a href="#">Mac Pro</a>
-                                <a href="#">Displays</a>
-                            </div>
+                    <div class="footer-col">
+                        <div class="footer-col-title">
+                            <h3>iPad</h3>
                         </div>
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>iPad</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">iPad Pro</a>
-                                <a href="#">iPad Air</a>
-                                <a href="#">iPad Mini</a>
-                                <a href="#">iPad</a>
-                            </div>
+                        <div class="footer-categories">
+                            <a href="#">iPad Pro</a>
+                            <a href="#">iPad Air</a>
+                            <a href="#">iPad Mini</a>
+                            <a href="#">iPad</a>
                         </div>
+                    </div>
 
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>iPhone</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">iPhone 17 Pro</a>
-                                <a href="#">iPhone 17</a>
-                                <a href="#">iPhone 17 Air</a>
-                                <a href="#">iPhone 16e</a>
-                                <a href="#">iPhone 16</a>
-                            </div>
+                    <div class="footer-col">
+                        <div class="footer-col-title">
+                            <h3>iPhone</h3>
                         </div>
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>Watch</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">Watch Series 11</a>
-                                <a href="#">Watch SE</a>
-                                <a href="#">Watch Ultra 3</a>
-                                <a href="#">Watch Nike</a>
-                                <a href="#">Watch Hermes</a>
-                            </div>
+                        <div class="footer-categories">
+                            <a href="#">iPhone 17 Pro</a>
+                            <a href="#">iPhone 17</a>
+                            <a href="#">iPhone Air</a>
+                            <a href="#">iPhone 16e</a>
+                            <a href="#">iPhone 16</a>
                         </div>
+                    </div>
 
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>AirPods</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">AirPods 4</a>
-                                <a href="#">AirPods Pro 3</a>
-                                <a href="#">AirPods Max</a>
-                            </div>
+                    <div class="footer-col">
+                        <div class="footer-col-title">
+                            <h3>Watch</h3>
+                        </div>
+                        <div class="footer-categories">
+                            <a href="#">Watch Series 11</a>
+                            <a href="#">Watch SE 3</a>
+                            <a href="#">Watch Ultra 3</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <div class="footer-col-title">
+                            <h3>AirPods</h3>
+                        </div>
+                        <div class="footer-categories">
+                            <a href="#">AirPods 4</a>
+                            <a href="#">AirPods Pro 3</a>
+                            <a href="#">AirPods Max</a>
                         </div>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </div>
+        </footer>
+    </div>
 </body>
 
 </html>

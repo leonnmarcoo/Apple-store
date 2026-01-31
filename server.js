@@ -82,7 +82,7 @@ const User = mongoose.model('User', userSchema);
 // Product Schema
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
-  type: { type: String, required: true, enum: ['iPhone', 'iPad', 'Mac', 'Airpods', 'Watch'] },
+  type: { type: String, required: true, enum: ['iPhone', 'iPad', 'Mac', 'AirPods', 'Watch'] },
   price: { type: Number, required: true, min: 0 },
   description: { type: String, required: true },
   chipInfo: { type: String, default: '' },
