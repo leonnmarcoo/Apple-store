@@ -242,7 +242,7 @@ app.get('/api/products', async (req, res) => {
   try {
     const { type } = req.query;
     const filter = type ? { type } : {};
-    const products = await Product.find(filter).sort({ createdAt: -1 });
+    const products = await Product.find(filter).sort({ createdAt: 1 });
     res.json(products);
   } catch (error) {
     console.error('Error fetching products:', error);

@@ -4,7 +4,8 @@ async function loadIPhoneProducts() {
         const response = await fetch('/api/products?type=iPhone');
         const products = await response.json();
 
-        const container = document.querySelector('.products-card-main-container');
+        const container = document.getElementById('iphone-products-container');
+        if (!container) return;
         
         if (!products || products.length === 0) {
             container.innerHTML = '<p style="text-align: center; padding: 20px;">No iPhone products available yet.</p>';
@@ -14,24 +15,17 @@ async function loadIPhoneProducts() {
         // Clear existing content
         container.innerHTML = '';
 
-        // Create rows with 3 products each
-        for (let i = 0; i < products.length; i += 3) {
-            const row = document.createElement('div');
-            row.className = 'product-card-row';
-
-            // Add up to 3 products per row
-            for (let j = i; j < i + 3 && j < products.length; j++) {
-                const product = products[j];
-                const card = createProductCard(product);
-                row.appendChild(card);
-            }
-
-            container.appendChild(row);
-        }
+        // Add products directly to container (horizontal scroll)
+        products.forEach((product) => {
+            const card = createProductCard(product);
+            container.appendChild(card);
+        });
     } catch (error) {
         console.error('Error loading iPhone products:', error);
-        document.querySelector('.products-card-main-container').innerHTML = 
-            '<p style="text-align: center; padding: 20px;">Error loading products. Please try again later.</p>';
+        const container = document.getElementById('iphone-products-container');
+        if (container) {
+            container.innerHTML = '<p style="text-align: center; padding: 20px;">Error loading products. Please try again later.</p>';
+        }
     }
 }
 
@@ -43,11 +37,12 @@ function createProductCard(product) {
     
     card.innerHTML = `
         <div class="product-image-container">
-            <img src="${product.image}" alt="${product.name}">
+            <img src="${product.image}" alt="${product.name}" onerror="this.src='assets/Products/iPhone/iPhone1.png'">
         </div>
         <div class="product-info-main-container">
             <h2>${product.name}</h2>
-            <p>${product.description}</p>
+            ${product.chipInfo ? `<p class="chip-info">${product.chipInfo}</p>` : ''}
+            <p class="product-description">${product.description}</p>
             <p class="price-range">From ${formattedPrice}</p>
             <button class="buy-button-products">Buy</button>
         </div>

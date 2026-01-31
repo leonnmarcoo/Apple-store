@@ -17,18 +17,10 @@ async function loadMacProducts() {
         }
 
         container.innerHTML = '';
-
-        let currentRow = null;
         
-        products.forEach((product, index) => {
-            if (index % 3 === 0) {
-                currentRow = document.createElement('div');
-                currentRow.className = 'product-card-row';
-                container.appendChild(currentRow);
-            }
-
+        products.forEach((product) => {
             const productCard = createProductCard(product);
-            currentRow.appendChild(productCard);
+            container.appendChild(productCard);
         });
     } catch (error) {
         console.error('Error loading Mac products:', error);
@@ -51,8 +43,8 @@ function createProductCard(product) {
         </div>
         <div class="product-info-main-container">
             <h2>${product.name}</h2>
-            ${product.chipInfo ? `<p><strong>${product.chipInfo}</strong></p>` : ''}
-            <p>${product.description}</p>
+            ${product.chipInfo ? `<p class="chip-info">${product.chipInfo}</p>` : ''}
+            <p class="product-description">${product.description}</p>
             <p class="price-range">From ₱${product.price.toLocaleString()}</p>
             <button class="buy-button-products">Buy</button>
         </div>
