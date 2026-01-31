@@ -7,6 +7,7 @@
     <title>Users - Apple Store Admin</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="admin-users.js" defer></script>
 </head>
 
 <body>
@@ -19,106 +20,72 @@
 
                 <div class="menu-items-main-container admin-nav">
                     <a href="admin-page.html">Products</a>
-                    <a href="users.html" class="active">User</a>
+                    <a href="users.html" class="active">Users</a>
                     <a href="order.html">Orders</a>
-                    <a href="bag.html">Bag</a>
                 </div>
 
                 <div class="menu-icons-main-container">
                 </div>
             </div>
         </header>
+    </div>
 
-        <section class="admin-page-main-container">
-            <div class="admin-page-title-container">
+    <div class="page-container-grey-background">
+        <section class="admin-hero-section">
+            <div class="admin-title-container">
                 <h1>Users</h1>
             </div>
         </section>
 
-        <section class="table-view-placeholder">
-            <div class="table">
+        <section class="admin-content-section">
+            <div class="admin-table-full-width">
+                <div class="admin-table-container" id="users-table">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                        </tbody>
+                    </table>
+                </div>
 
+                <div class="admin-buttons-container">
+                    <button class="admin-action-button" id="delete-user">DELETE</button>
+                </div>
             </div>
         </section>
+    </div>
 
-        <div class="page-container-grey-background">
-            <footer>
-                <div class="footer-main-container">
-                    <div class="footer-logo-section">
-                        <div class="footer-col">
-                            <img src="assets/Logo.png" alt="Apple Logo">
-                        </div>
+    <div class="page-container-grey-background">
+        <footer class="admin-footer">
+            <div class="admin-footer-container">
+                <div class="footer-logo-section">
+                    <div class="footer-col">
+                        <img src="assets/Logo.png" alt="Apple Logo">
                     </div>
+                </div>
 
-                    <div class="footer-categories-main-container">
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>Mac</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">MacBook Pro</a>
-                                <a href="#">MacBook Air</a>
-                                <a href="#">iMac</a>
-                                <a href="#">Mac Mini</a>
-                                <a href="#">Mac Studio</a>
-                                <a href="#">Mac Pro</a>
-                                <a href="#">Displays</a>
-                            </div>
+                <div class="admin-footer-links">
+                    <div class="footer-col">
+                        <div class="footer-col-title">
+                            <h3>Apple Admin</h3>
                         </div>
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>iPad</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">iPad Pro</a>
-                                <a href="#">iPad Air</a>
-                                <a href="#">iPad Mini</a>
-                                <a href="#">iPad</a>
-                            </div>
-                        </div>
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>iPhone</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">iPhone 17 Pro</a>
-                                <a href="#">iPhone 17</a>
-                                <a href="#">iPhone 17 Air</a>
-                                <a href="#">iPhone 16e</a>
-                                <a href="#">iPhone 16</a>
-                            </div>
-                        </div>
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>Watch</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">Watch Series 11</a>
-                                <a href="#">Watch SE</a>
-                                <a href="#">Watch Ultra 3</a>
-                                <a href="#">Watch Nike</a>
-                                <a href="#">Watch Hermes</a>
-                            </div>
-                        </div>
-
-                        <div class="footer-col">
-                            <div class="footer-col-title">
-                                <h3>AirPods</h3>
-                            </div>
-                            <div class="footer-categories">
-                                <a href="#">AirPods 4</a>
-                                <a href="#">AirPods Pro 3</a>
-                                <a href="#">AirPods Max</a>
-                            </div>
+                        <div class="footer-categories">
+                            <a href="admin-page.html">Products</a>
+                            <a href="users.html">Users</a>
+                            <a href="order.html">Orders</a>
                         </div>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </div>
+        </footer>
+    </div>
 </body>
 
 </html>

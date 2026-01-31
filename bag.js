@@ -200,6 +200,55 @@ function handleAddButtonClick(button, product) {
     }
 }
 
+// Checkout function - creates order in database
+async function checkout() {
+    const bag = getBag();
+    
+    if (bag.length === 0) {
+        alert('Your bag is empty!');
+        return;
+    }
+
+    // Prepare products array for order
+    const products = bag.map(item => ({
+        productId: item._id,
+        name: item.name,
+        price: parseFloat(item.price),
+        quantity: item.quantity,
+        image: item.image
+    }));
+
+    const total = calculateTotal();
+
+    try {
+        const response = await fetch('/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                products,
+                total
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Clear the bag after successful checkout
+            localStorage.removeItem('appleBag');
+            alert('Order placed successfully! Your order ID is: ' + data.orderId);
+            // Refresh the page to show empty bag
+            window.location.reload();
+        } else {
+            alert('Failed to place order: ' + data.error);
+        }
+    } catch (error) {
+        console.error('Checkout error:', error);
+        alert('Failed to place order. Please try again.');
+    }
+}
+
 // Initialize bag page
 document.addEventListener('DOMContentLoaded', () => {
     // If on bag page, render items
@@ -209,9 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Setup checkout button
         const checkoutBtn = document.getElementById('checkout-btn');
         if (checkoutBtn) {
-            checkoutBtn.addEventListener('click', () => {
-                alert('Checkout functionality coming soon!');
-            });
+            checkoutBtn.addEventListener('click', checkout);
         }
     }
     
