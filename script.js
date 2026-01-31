@@ -91,13 +91,17 @@ function showUserMenu(username) {
 		return;
 	}
 
+	// Get profile button position
+	const profileBtn = document.getElementById('profile-button');
+	const btnRect = profileBtn.getBoundingClientRect();
+
 	// Create user menu
 	const menu = document.createElement('div');
 	menu.className = 'user-menu';
 	menu.style.cssText = `
 		position: fixed;
-		top: 60px;
-		right: 20px;
+		top: ${btnRect.bottom + 10}px;
+		right: ${window.innerWidth - btnRect.right}px;
 		background: white;
 		border: 1px solid #e5e7eb;
 		border-radius: 8px;

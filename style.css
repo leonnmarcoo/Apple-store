@@ -959,9 +959,14 @@ footer #apple-logo {
 .bag-hero-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 50px 96px;
     padding-top: 150px;
+}
+
+.bag-title-container {
+    width: 100%;
+    max-width: 1320px;
 }
 
 .bag-title-container h1 {
@@ -975,6 +980,7 @@ footer #apple-logo {
 .bag-products-section {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 30px;
     padding: 0 96px;
     padding-bottom: 50px;
@@ -984,6 +990,8 @@ footer #apple-logo {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    width: 100%;
+    max-width: 1320px;
 }
 
 .empty-bag-message {
@@ -1093,6 +1101,7 @@ footer #apple-logo {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
+    max-width: 1320px;
     margin-top: 30px;
 }
 
